@@ -1,12 +1,44 @@
-﻿<Window x:Class="JryEfuSearcher.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:JryEfuSearcher"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
+﻿<mah:MetroWindow x:Class="JryEfuSearcher.MainWindow"
+                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                 xmlns:local="clr-namespace:JryEfuSearcher"
+                 xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+                 mc:Ignorable="d"
+                 Title="jry efu searcher"
+                 MinHeight="400"
+                 MinWidth="650"
+                 GlowBrush="{StaticResource AccentColorBrush}"
+                 WindowStartupLocation="CenterScreen"
+                 d:DataContext="{d:DesignInstance local:MainViewModel }">
     <Grid>
-        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <TextBox Margin="4"
+                     Text="{Binding FilterText, UpdateSourceTrigger=PropertyChanged}" />
+            
+            <DataGrid Grid.Row="1"
+                      Margin="4,0,4,4"
+                      ItemsSource="{Binding Items}"
+                      AutoGenerateColumns="False">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="efu"
+                                        Binding="{Binding EfuFileName}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="filename"
+                                        Binding="{Binding FileName}"
+                                        IsReadOnly="True" />
+                    <DataGridTextColumn Header="path"
+                                        Binding="{Binding FullPath}"
+                                        IsReadOnly="True" />
+                </DataGrid.Columns>
+            </DataGrid>
+            
+        </Grid>
     </Grid>
-</Window>
+</mah:MetroWindow>

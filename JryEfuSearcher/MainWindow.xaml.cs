@@ -1,28 +1,58 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Jasily.ComponentModel;
 
 namespace JryEfuSearcher
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
-            InitializeComponent();
+            this.InitializeComponent();
+            this.DataContext = new MainViewModel();
+        }
+    }
+
+    public class MainViewModel : JasilyViewModel
+    {
+        public MainViewModel()
+        {
+            this.FilterText = string.Empty;
+        }
+
+        private string filterText;
+
+        public ObservableCollection<FileSystemRecordViewModel> Items { get; }
+            = new ObservableCollection<FileSystemRecordViewModel>();
+
+        public string FilterText
+        {
+            get { return this.filterText; }
+            set
+            {
+                if (this.SetPropertyRef(ref this.filterText, value))
+                    this.BeginDelayFilter();
+            }
+        }
+
+        public async void BeginDelayFilter()
+        {
+            var text = this.FilterText ?? string.Empty;
+            await Task.Delay(400);
+            if (text == this.filterText)
+            {
+                this.Items.Reset(((App) Application.Current).EfuFileManager
+                    .Search(text.Trim())
+                    .Select(z => new FileSystemRecordViewModel(z)));
+            }
         }
     }
 }
