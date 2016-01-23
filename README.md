@@ -1,6 +1,6 @@
 # JRYEfuSearcher
 
-I got a ton filelist create from [Everything](http://www.voidtools.com/), so I need a searcher which can seach a whold folder.
+I got a ton filelist create from [Everything](http://www.voidtools.com/), so I need a searcher which can search all of it.
 
 ## how it look like ?
 
