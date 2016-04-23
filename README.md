@@ -14,6 +14,6 @@ I got a ton filelist create from [Everything](http://www.voidtools.com/), so I n
 
 ## binary file
 
-you can download it from my onedrive: [http://1drv.ms/1QqvVFa](http://1drv.ms/1QqvVFa)
+you can download it from [project release](https://github.com/Cologler/JRYEfuSearcher/releases)
 
 complete free and green!
